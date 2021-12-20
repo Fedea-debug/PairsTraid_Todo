@@ -6,7 +6,7 @@ module.exports = {
       "tags",
       [
         {
-          name: "blue",
+          name: "white",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

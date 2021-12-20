@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "todo",
-    "host": "127.0.0.1",
+    "username": "deadsugd_practic",
+    "password": "wt6OsN4&",
+    "database": "deadsugd_practic",
+    "host": "deadsugd.beget.tech",
     "dialect": "mariadb",
     "logging":true
   },

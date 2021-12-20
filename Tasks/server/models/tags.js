@@ -8,9 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Todo, {
-        foreignKey: "tag_id",
-        through: "todo_tags",
+      this.hasMany(models.Todo, {
         as: "tags",
       });
     }
