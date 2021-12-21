@@ -7,6 +7,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+        isUnique: true
       },
       title: {
         type: Sequelize.STRING,
@@ -29,9 +30,18 @@ module.exports = {
         allowNull: false,
       },
 
-      userID: {
-        type: Sequelize.INTEGER,
+      user_id: {
+        type: Sequelize.STRING,
         allowNull: false
+      },
+
+      tag_id:{
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references : {
+          model: "tags",
+          key: "id"
+        }
       },
       
       createdAt: {

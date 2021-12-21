@@ -1,27 +1,31 @@
 "use strict";
 const { Model } = require("sequelize");
+const todo = require("./todo")
 module.exports = (sequelize, DataTypes) => {
-  class Tags extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      this.hasMany(models.Todo, {
-        as: "tags",
-      });
-    }
+  class tags extends Model {
+
   }
-  Tags.init(
+  tags.init(
     {
       name: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: "Tags",
+      modelName: "tags",
       tableName: "tags",
     }
   );
-  return Tags;
+
+  tags.beforeSync(() => console.log("b4 creating the tags table"))
+  tags.afterSync(() => console.log("after creating the tags table"))
+
+  tags.associate = models =>{
+    tags.hasMany(models.todo,{
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE"
+    })
+  
+  }
+  
+  return tags;
 };
