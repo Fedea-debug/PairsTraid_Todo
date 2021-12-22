@@ -1,3 +1,4 @@
+const ApiError = require("../error/apiError");
 const { tags } = require("../models");
 
 class tagsService {
@@ -12,17 +13,18 @@ class tagsService {
   }
 
   async getByName(value) {
-    console.log(value);
     const tagByName = await tags.findOne({ where: { name: `${value}` } });
-    const tagID = tagByName.id
-    console.log(tagID)
+    if (tagByName === null) {
+      return ApiError.badRequest({
+        success: false,
+        result: {
+          message: "Tag not found",
+          status: 404,
+        },
+      });
+    }
+    const tagID = tagByName.id;
     return tagID;
   }
-
-  // async getById(id) {
-  //   console.log(id);
-  //   const tagById = await Tags.findOne({ where: { id: `${id}` } });
-  //   return tagById;
-  // }
 }
 module.exports = new tagsService();

@@ -3,9 +3,7 @@ const { Model } = require("sequelize");
 const tags = require("./tags");
 
 module.exports = (sequelize, DataTypes) => {
-  class todo extends Model {
-
-  }
+  class todo extends Model {}
   todo.init(
     {
       title: DataTypes.STRING,
@@ -14,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       status: DataTypes.BOOLEAN,
       deadLine: DataTypes.DATE,
       user_id: DataTypes.INTEGER,
-      tag_id:{
-        field:"tag_id",
-        type: DataTypes.STRING
-      }
+      tag_id: {
+        field: "tag_id",
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
@@ -25,17 +23,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  todo.beforeSync(() => console.log("b4 creating the todo table"))
-  todo.afterSync(() => console.log("after creating the todo table"))
+  todo.beforeSync(() => console.log("b4 creating the todo table"));
+  todo.afterSync(() => console.log("after creating the todo table"));
 
-todo.associate = models =>{
-  todo.belongsTo(models.tags,{
-    foreignKey: "tag_id",
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE"
-  })
-}
-
+  todo.associate = (models) => {
+    todo.belongsTo(models.tags, {
+      foreignKey: "tag_id",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+  };
 
   return todo;
 };
