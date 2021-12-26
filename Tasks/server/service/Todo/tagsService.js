@@ -1,5 +1,5 @@
-const ApiError = require("../error/apiError");
-const { tags } = require("../models");
+const ApiError = require("../../error/apiError");
+const { tags } = require("../../models");
 
 class tagsService {
   async create(tag) {
@@ -8,7 +8,7 @@ class tagsService {
   }
 
   async getAll() {
-    const all_tags = await tags.findAll();
+    const all_tags = await tags.findAndCountAll();
     return all_tags;
   }
 

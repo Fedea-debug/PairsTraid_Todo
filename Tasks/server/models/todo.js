@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       check: DataTypes.BOOLEAN,
       status: DataTypes.BOOLEAN,
       deadLine: DataTypes.DATE,
-      user_id: DataTypes.INTEGER,
-      tag_id: {
+      user_id: DataTypes.STRING,
+      tagId: {
         field: "tag_id",
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       },
     },
     {

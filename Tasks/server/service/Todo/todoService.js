@@ -1,4 +1,4 @@
-const { todo } = require("../models");
+const { todo } = require("../../models");
 
 class todoService {
   async create(todo_req, tag_id, uuid) {
@@ -14,8 +14,8 @@ class todoService {
     return createdTodo;
   }
 
-  async getAll() {
-    const all_todo = await todo.findAll({
+  async getAll(limit_req, offset_req, uuid, status) {
+    const all_todo = await todo.findAndCountAll({
       attributes: [
         `id`,
         `title`,
@@ -24,23 +24,30 @@ class todoService {
         `status`,
         `deadLine`,
         `user_id`,
-        `tag_id`,
+        `tagId`,
       ],
+
+      // if(status) {
+      //   where: {
+      //     status: status;
+      //   }
+      // },
+
+      limit: limit_req,
+      offset: offset_req,
     });
+
     return all_todo;
   }
 
   async update(todoPut, id) {
-    const updatedPost = await todo.update(todoPut, { where: { id: id } });
-    return updatedPost;
+    const updatedTodo = await todo.update(todoPut, { where: { id: id } });
+    return updatedTodo;
   }
 
   async delete(id) {
-    if (!id) {
-      throw new Error("");
-    }
-    const post = await Post.findByIdAndDelete(id);
-    return post;
+    const deletedTodo = await todo.destroy({ where: { id: id } });
+    return deletedTodo;
   }
 }
 module.exports = new todoService();
